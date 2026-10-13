@@ -53,9 +53,11 @@ thcli auth login --browser no
 |---|---|
 | `auth` | 登录、登出、手填永久密钥、查看登录态 |
 | `models` | 模型广场：列表、详情、比价 |
+| `tools` | 媒体处理工具：列表、详情、比价 |
 | `endpoint` | 推理接入点：列表、详情、改配、删除 |
 | `deploy` | 为模型创建推理接入点 |
-| `+chat` | 与模型对话（唯一真正调用推理接口的命令） |
+| `+chat` | 与模型对话（真正调用推理接口） |
+| `+tool` | 媒体处理：图片超分/抠图/扩图/擦除，视频转码/增强/擦除/配音，音频降噪/分离 |
 | `chat-config` | 本地维护对话用的 API Key |
 | `key` | API 密钥：增删改查、启停、查明文 |
 | `plan` | 套餐（TokenPlan）：购买、续费、专属 Key、用量 |
@@ -73,6 +75,17 @@ thcli auth login --browser no
 thcli --help
 thcli plan --help
 thcli plan key create --help
+```
+
+## 媒体处理工具
+
+`+tool` 与 `tools` 用于对图片 / 视频 / 音频做 AI 处理（超分、抠图、扩图、擦除、转码、增强、插帧、打码、翻译配音、降噪、人声分离）。完整用法、工具清单与参数见 [docs/media-tools.md](./docs/media-tools.md)：
+
+```shell
+thcli tools list                                                    # 看有哪些工具（--json 给机读 schema）
+thcli +tool image-cutout https://x/a.png --version cutout-1.0-flash  # 默认异步：只提交，回 task_id
+thcli +tool task image-cutout <task_id>                             # 查询任务
+thcli +tool image-erase https://x/a.png --prompt "擦除水印" --wait    # 同步等待：跑完给结果地址
 ```
 
 ## 全局选项

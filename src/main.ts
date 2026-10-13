@@ -22,6 +22,7 @@ import { registerLangCommands } from "./commands/lang.js";
 import { registerMonitorCommands } from "./commands/monitor.js";
 import { registerUsageCommands } from "./commands/usage.js";
 import { registerConnectCommands } from "./commands/connect.js";
+import { registerToolCommands } from "./commands/tool.js";
 import type { GlobalArgs } from "./core/credentials.js";
 import { initLang, t } from "./core/i18n.js";
 import { setJsonMode } from "./core/output.js";
@@ -138,6 +139,7 @@ registerSiteCommands(program, getGlobals);
 registerEnvCommands(program, getGlobals);
 registerLangCommands(program, () => cliLangValue);
 registerConnectCommands(program);
+registerToolCommands(program, getGlobals);
 
 // 全局凭证/环境选项默认只在子命令之前生效；给每个叶子命令也补一份，让它们出现在
 // 子命令之后也不报 unknown option（值由 getGlobals 统一读取，这里只为通过解析）。

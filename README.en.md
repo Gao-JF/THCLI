@@ -52,9 +52,11 @@ thcli auth login --browser no
 |---|---|
 | `auth` | Log in, log out, enter permanent keys manually, check login status |
 | `models` | Model catalog: list, details, side-by-side comparison |
+| `tools` | Media processing tools: list, details, side-by-side comparison |
 | `endpoint` | Inference endpoints: list, details, reconfiguration, deletion |
 | `deploy` | Create an inference endpoint for a model |
-| `+chat` | Chat with a model (the only command that invokes the inference API) |
+| `+chat` | Chat with a model (invokes the inference API) |
+| `+tool` | Media processing: image super-resolution/cutout/outpaint/erase, video transcode/enhance/erase/dubbing, audio denoise/separate |
 | `chat-config` | Manage the API key used for conversations locally |
 | `key` | API keys: create, update, list, enable/disable, reveal |
 | `plan` | Plans (Token Plan): purchase, renewal, dedicated keys, usage |
@@ -72,6 +74,17 @@ thcli auth login --browser no
 thcli --help
 thcli plan --help
 thcli plan key create --help
+```
+
+## Media Processing Tools
+
+`+tool` and `tools` run AI processing on images / video / audio (super-resolution, cutout, outpainting, erase, transcode, enhance, frame interpolation, privacy mask, dubbing, denoise, vocal separation). See [docs/media-tools.en.md](./docs/media-tools.en.md) for the full guide, tool list, and parameters:
+
+```shell
+thcli tools list                                                    # see available tools (--json for machine-readable schema)
+thcli +tool image-cutout https://x/a.png --version cutout-1.0-flash  # async by default: submit, get task_id
+thcli +tool task image-cutout <task_id>                             # query the task
+thcli +tool image-erase https://x/a.png --prompt "erase watermark" --wait  # wait: returns the result URL
 ```
 
 ## Global Options

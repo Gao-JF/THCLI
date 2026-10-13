@@ -45,8 +45,8 @@ export const SKILLS_CACHE_DIR = path.join(CONFIG_DIR, "skills-cache");
 export const SKILLS_MANIFEST_PATH = path.join(SKILLS_CACHE_DIR, "manifest.json");
 
 /**
- * 日志文件：管控面（console）与数据面（chat）分开，便于排查时只看一侧。
+ * 日志文件：管控面（console）与数据面（chat / tool）分文件，便于排查时只看一侧。
  */
-export function logPath(profile: string, site: string, kind: "console" | "chat"): string {
+export function logPath(profile: string, site: string, kind: "console" | "chat" | "tool"): string {
   return path.join(LOG_DIR, `${profile}.${site}.tokenhub-plugin-${kind}.log`);
 }

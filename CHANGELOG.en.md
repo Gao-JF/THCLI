@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- **Media processing tools**: new `+tool` command group for AI processing of images / video / audio (image upscale/cutout/outpaint/erase, video transcode/large-model enhance/frame interpolation/color enhance/erase/privacy mask/dubbing, audio denoise/vocal separation). **Async by default** (returns `task_id` and `request_id` immediately; tasks can run for a long time); add `--wait` to poll to the terminal state and print the result; `+tool task <tool_id> <task_id>` queries a task.
+- **Tool listing**: new `tools list` to list available media processing tools locally (no network); `--json` emits a machine-readable schema (name/type/required/choices/default/description) for scripts and AI agents.
+- See [docs/media-tools.en.md](./docs/media-tools.en.md).
+
 ## [1.0.0]
 
 ### Added

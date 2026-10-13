@@ -72,10 +72,16 @@ export function logDataPlaneCall(
     status: "ok" | "error";
     error?: string;
     extra?: Record<string, unknown>;
+    /**
+     * 数据面日志拆分：`+chat` 用 chat（默认），`+tool` 用 tool。
+     * 分开文件是为了排查时只看一侧——两者虽同走数据面，但调用形态差异大
+     * （chat 是流式对话，tool 是提交/轮询任务），混在一个文件里互相干扰。
+     */
+    kind?: "chat" | "tool";
   },
 ): void {
   append(
-    logPath(profile, site, "chat"),
+    logPath(profile, site, fields.kind ?? "chat"),
     format({
       channel: fields.channel,
       request_id: fields.requestId || "-",
